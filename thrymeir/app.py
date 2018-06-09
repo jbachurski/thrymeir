@@ -7,7 +7,7 @@ import level
 import states
 
 
-# noinspection PyMethodOverriding
+# noinspection PyMethodOverriding,PyAbstractClass
 class App(pyglet.window.Window):
     def __init__(self):
         super().__init__(256, 256, resizable=True)
@@ -19,7 +19,7 @@ class App(pyglet.window.Window):
         self.key_state = pyglet.window.key.KeyStateHandler()
         self.push_handlers(self.key_state)
 
-        self.game_time_clock = pyglet.clock.Clock(fps_limit=50)
+        self.game_time_clock = pyglet.clock.Clock()
         pyglet.clock.schedule(self.game_time_clock.tick)
         self.game_time_clock.schedule_interval(lambda dt: self.on_update(), 1 / 50)
 
