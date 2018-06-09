@@ -26,8 +26,7 @@ class App(pyglet.window.Window):
         pyglet.resource.path = ['img']
         pyglet.resource.reindex()
 
-        self.state = states.StateManager()
-        self.state.current = level.Level(self)
+        self.state = states.StateManager(level.Level(self))
 
         logging.info(f"New app created: {self}")
 
