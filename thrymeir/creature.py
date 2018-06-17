@@ -1,6 +1,7 @@
 import pyglet
 
 import entity
+import rectangular_logic
 import room
 
 SQRT2 = 2 ** 0.5
@@ -15,6 +16,8 @@ class Creature(entity.Entity):
 
         self.walking_n = self.walking_e = self.walking_s = self.walking_w = False
 
+    def register(self):
+        super().register()
         self.room.to_update.add(self)
 
     def update(self):
@@ -26,8 +29,28 @@ class Creature(entity.Entity):
             move_x = move_x / abs(move_x) / SQRT2
             move_y = move_y / abs(move_y) / SQRT2
 
-        self.x += move_x * self.walking_speed
-        self.y += move_y * self.walking_speed
+        if move_x:
+            self.x += move_x * self.walking_speed
+
+            for wall in self.room.walls:
+                if not rectangular_logic.is_collision(self.x, self.y, self.w, self.h, wall.x, wall.y, wall.w, wall.h):
+                    continue
+                if move_x > 0:
+                    self.x = wall.x - self.w
+                elif move_x < 0:
+                    self.x = wall.x + wall.w
+                break
+
+        if move_y:
+            self.y += move_y * self.walking_speed
+
+            for wall in self.room.walls:
+                if not rectangular_logic.is_collision(self.x, self.y, self.w, self.h, wall.x, wall.y, wall.w, wall.h):
+                    continue
+                if move_y > 0:
+                    self.y = wall.y - self.h
+                elif move_y < 0:
+                    self.y = wall.y + wall.h
 
 
 class Player(Creature):

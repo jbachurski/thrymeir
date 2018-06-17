@@ -2,6 +2,7 @@ import logging
 
 import pyglet
 
+import debug_draw
 import room
 import states
 import app
@@ -22,5 +23,5 @@ class Level(states.State):
         self.test_room.update()
 
     def draw(self):
-        pyglet.graphics.draw(4, pyglet.gl.GL_LINES, ('v2i', (0, 0, 256, 256, 0, 256, 256, 0)))
+        debug_draw.draw_cross(0, 0, 256, 256)
         self.test_room.draw()
