@@ -8,7 +8,7 @@ __all__ = ['LetterboxViewport']
 
 class LetterboxViewport:
     # Some GL-specific code is commented out.
-    # This means that for now everything works without it, but may be needed if something breaks.
+    # This means that for now everything works without it, but it may be needed if something breaks.
 
     def __init__(self, window: pyglet.window.Window, scene_width: int, scene_height: int, smooth_scaling: bool = False):
         self.window = window

@@ -1,13 +1,16 @@
 import typing
 
+
 __all__ = ['State', 'StateManager']
 
+
 class State:
-    def on_update(self):
+    def update(self):
         pass
 
-    def on_draw(self):
+    def draw(self):
         pass
+
 
 class StateManager:
     def __init__(self, initial: State):
@@ -23,4 +26,3 @@ class StateManager:
             raise RuntimeError("Operation causes depletion of state stack")
         self.current = self._stack[-2]
         return self._stack.pop()
-        
