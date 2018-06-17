@@ -27,7 +27,7 @@ class Room:
         self.to_keep = set()  # If entity isn't in any other set, it is here to hide from garbage collector.
 
         # TODO: This, along with all other things, will be loaded from Tiled map file.
-        self.player = creature.Player(self, 100, 100, 16, 32,
+        self.player = creature.Player(self, 100, 100, 16, 16,
                                       pyglet.image.TextureRegion(0, 0, 0, 16, 32, self.level.app.entities_image))
         self.walls.add(entity.Entity(self, 0, 0, 256, 16))
         self.walls.add(entity.Entity(self, 0, 0, 16, 256))
@@ -40,6 +40,7 @@ class Room:
             e.update()
 
     def draw(self):
+        # TODO: Remove this.
         for wall in self.walls:
             debug_draw.draw_entity(wall)
 
