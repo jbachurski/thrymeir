@@ -1,6 +1,3 @@
-import typing
-
-
 __all__ = ['State', 'StateManager']
 
 
