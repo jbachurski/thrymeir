@@ -1,6 +1,8 @@
 import logging
 
 import pyglet
+import pytmx
+from pytmx.util_pyglet import load_pyglet as pytmx_load_pyglet
 
 import creature
 import debug_draw

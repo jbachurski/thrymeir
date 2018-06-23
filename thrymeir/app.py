@@ -13,8 +13,7 @@ class App(pyglet.window.Window):
     HOW GOOD PROGRAMMING PRACTICES DO NOT DISPROVE, BUT SUPPORT, THE USE OF GOD OBJECTS [READ MORE >>]
     """
 
-    # TODO: investigate: why 30 updates per second?
-    tps = 30
+    tps = 60
 
     def __init__(self):
         super().__init__(256, 256, resizable=True)

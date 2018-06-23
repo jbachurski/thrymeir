@@ -5,7 +5,8 @@ import rectangular_logic
 import room
 
 SQRT2 = 2 ** 0.5
-
+INV_SQRT2 = 1 / SQRT2
+def sign(x): return -1 if x < 0 else 1
 
 class Creature(entity.Entity):
     def __init__(self, parent: 'room.Room', x: float, y: float, w: float, h: float,
@@ -21,13 +22,16 @@ class Creature(entity.Entity):
         self.room.to_update.add(self)
 
     def update(self):
+        self.handle_movement()
+    
+    def handle_movement(self):
         move_x = (0, 1)[self.walking_e] + (0, -1)[self.walking_w]
         move_y = (0, 1)[self.walking_n] + (0, -1)[self.walking_s]
 
         # Walking diagonally.
         if move_x and move_y:
-            move_x = move_x / abs(move_x) / SQRT2
-            move_y = move_y / abs(move_y) / SQRT2
+            move_x = sign(move_x) * INV_SQRT2
+            move_y = sign(move_y) * INV_SQRT2
 
         if move_x:
             self.x += move_x * self.walking_speed
@@ -54,7 +58,7 @@ class Creature(entity.Entity):
 
 
 class Player(Creature):
-    def update(self):
+    def handle_movement(self):
         keys = self.room.level.app.key_state  # Whether ‘tis nobler in the mind to suffer...?
 
         # TODO: This will be separated into some kind of input component.
@@ -63,4 +67,4 @@ class Player(Creature):
         self.walking_s = keys[pyglet.window.key.DOWN]
         self.walking_w = keys[pyglet.window.key.LEFT]
 
-        super().update()
+        super().handle_movement()
